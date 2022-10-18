@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.figure{
+    max-width: 600px;
+    margin: auto;
+    padding: 25px;
+    background-color: #f8fffe;
+    border: 1px solid #b0d2cb;
+    color: #0b4237;
+    box-sizing: border-box;
+    border-left-width: 10px;
+}
+.figure::before{
+    content: "\201c";
+    font-size: 100px;
+    color: #009578;
+    display: block;
+    margin-bottom: -60px;
+    margin-top: -20px;
+}
+
+blockquote p, figcaption{
+    font-family: 'Gelasio', serif;
+    font-style: italic;
+    font-size: 1.15em;
+    line-height: 1.5;
+    margin: 0;
+}
+figcaption{
+    font-weight: bold;
+    font-style: normal;
+    text-align: right;
+}
+figcaption::before{
+    content: "\2014\0020";
+}
+.comment-section{
+    text-align: center;
+    margin-top: 40px;
+}
+.comment-section a{
+    text-decoration: none;
+    color: #009578;
+}
+.comment-section a:hover{
+    cursor: pointer;
+    font-weight: bold;
+}

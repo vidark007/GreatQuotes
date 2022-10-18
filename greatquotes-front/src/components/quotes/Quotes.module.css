@@ -1,0 +1,33 @@
+.container-quote{
+    width: 48%;
+    margin: auto;
+
+}
+.button-asc{
+    background-color: transparent;
+    position: relative;
+    margin: 5px 5px 10px 0px;
+    padding: 8px 20px;
+    border-radius: 5px;
+    color: darkcyan;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border: 1px solid darkcyan;
+    transition: background-color, color 0.5s ease;
+}
+.button-asc:hover{
+    cursor: pointer;
+    background-color: darkcyan;
+    color: white;
+    padding: 9px 25px;
+}
+.line{
+    width: 100%;
+    border-bottom: 2px solid #a5b0ad;
+    margin-bottom: 25px;
+}
+
+
+
+

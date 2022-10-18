@@ -1,0 +1,39 @@
+.form{
+ margin: 60px auto auto;
+ padding: 20px 20px 80px;
+ width: 40%;
+ height: 80%;
+ background-color: white;
+ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+ border-radius: 5px;
+ display: block;
+}
+
+.form label{
+    display: block;
+    font-weight: bold;
+}
+
+input, textarea{
+    width: 96%;
+    padding: 10px;
+    margin: 3px auto auto;
+    border-radius: 5px;
+    border: 1px solid #cccaca;
+    background-color: #f0f2f5;
+}
+
+input:focus,textarea:focus{
+    background-color: #e6fcfa;
+    border-color: #11acac;
+}
+textarea{
+    height: 90px;
+    resize: none;
+}
+.form-group{
+    padding-bottom: 15px;
+}
+.button-component{
+    float: right;
+}

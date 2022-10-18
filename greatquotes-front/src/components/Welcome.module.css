@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.welcome-container{
+    text-align: center;
+    width: 60%;
+    margin: 100px auto auto;
+    background-color: white;
+    display: flex;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 15px;
+}
+.welcome h1{
+    padding-top: 25px;
+    font-family: 'Gelasio', serif;
+    font-weight: bold;
+    color: darkcyan;
+    font-size: 3.15em;
+}
+.welcome h3{
+    font-family: 'Gelasio', sans-serif;
+    font-weight: bold;
+    color: #305959;
+    font-size: 1.5em;
+    font-style: italic;
+}
+.welcome p {
+    text-align: left;
+    padding: 25px 0px 5px 50px;
+    font-family: 'Gelasio', serif;
+    font-size: 1.15em;
+    line-height: 1.5;
+}
+.img-container{
+    padding-top: 50px;
+    margin: auto;
+}
+
+.img-container img{
+    width: 80%;
+}
