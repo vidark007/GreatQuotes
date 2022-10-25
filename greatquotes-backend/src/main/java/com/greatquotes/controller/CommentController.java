@@ -28,7 +28,7 @@ public class CommentController {
         this.commentMapper = commentMapper;
     }
 
-    @GetMapping("/quotes/{id}")
+    @GetMapping("/quote/comment/{id}")
     public List<CommentDto> getAllCommentsFromQuote(@PathVariable int id){
         List<Comment> commentList = commentService.getAllCommentsFromQuote(id);
 
@@ -46,7 +46,7 @@ public class CommentController {
         return commentDtoList;
     }
 
-    @PostMapping("/addComment/{quoteId}")
+    @PostMapping("/quote/addComment/{quoteId}")
     public void addNewComment(@RequestBody String newComment, @PathVariable int quoteId){
         CommentDto commentDto = new CommentDto();
         commentDto.setComment(newComment);

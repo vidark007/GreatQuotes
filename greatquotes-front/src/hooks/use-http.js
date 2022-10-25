@@ -1,17 +1,18 @@
 import React, {useState,useCallback} from 'react';
 
-function UseHttp(requestConfig, applyDataFunc) {
+function UseHttp() {
+   const url ="http://localhost:8080/api/v1/great-quotes";
 
    const [quotes,setQuotes] = useState([]);
    const [isLoading,setIsLoading] = useState(false);
    const [error, setError] = useState(null);
 
-   const sendRequest = useCallback(async ()=> {
+   const sendRequest = useCallback(async (requestConfig, applyDataFunc)=> {
       setIsLoading(true);
       setError(null)
       try{
          const response = await fetch(
-             requestConfig.url,
+             url+requestConfig.url,
              {
                 method: requestConfig.method ? requestConfig.method : 'GET',
                 headers: requestConfig.headers ? requestConfig.headers : {},
@@ -22,20 +23,10 @@ function UseHttp(requestConfig, applyDataFunc) {
             throw new Error("Loading Problem");
          }
 
-
          const data = await response.json();
 
          //Callback Func
          applyDataFunc(data)
-         /*const quoteList = data.map((quote)=>{
-                return {
-                   id: quote.id,
-                   author: quote.author,
-                   quote: quote.quote
-                }
-             }
-         )
-         setQuotes(quoteList);*/
       }
       catch (error ){
          setError(error.message || 'Something went wrong!');
