@@ -52,7 +52,6 @@ public class CommentController {
         commentDto.setComment(newComment);
         Comment comment = commentMapper.fromCommentDtoToComment(commentDto);
 
-
         Quote quote = quoteService.findQuoteById(quoteId);
         commentService.setComment(comment, quote);
     }

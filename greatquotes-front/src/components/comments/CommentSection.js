@@ -13,28 +13,24 @@ function CommentSection(props) {
 
     const fetchURL = { url : "/quote/comment/"+props.quouteID};
 
-    useEffect(()=>{
-        if(addCommentArea){
-            setButtonText("Add comment")
-        }
-    },[addCommentArea])
-
-    function loadCommentList(commentList){
+    const loadCommentList =useCallback( (commentList)=>{
         setComments(commentList.map((comment,index=0)=>{
             return {
                 id: index,
                 comment: comment.comment,
             }
         }));
-    }
+    },[])
 
     const setNewCommentToList = useCallback((newComment)=>{
         setComments((prevState)=>([...prevState,newComment]))
-    },[buttonText])
+    },[])
 
     function addNewComment(){
+        setAddCommentArea(false);
+
         const newComment = commentRef.current.value;
-        console.log(newComment.trim().length)
+
         if(newComment.trim().length > 0) {
             const postUrl = {
                 url: "/quote/addComment/" + props.quouteID,
@@ -42,20 +38,29 @@ function CommentSection(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: newComment,
             }
+            console.log(postUrl)
             postNewComment(postUrl, () => setNewCommentToList(newComment))
 
-            setAddCommentArea(false);
         }
     }
 
     const {sendRequest: fetchAllComments} = useHttp();
     const {sendRequest: postNewComment} = useHttp();
 
+    useEffect(()=>{
+        if(addCommentArea){
+            setButtonText("Add comment")
+        }
+        else{
+            setButtonText(defaultButtonText);
+        }
+    },[addCommentArea])
+
 
     useEffect(() =>{
         fetchAllComments(fetchURL,loadCommentList)
         console.log("useEffect")
-    },[fetchAllComments])
+    },[buttonText, addCommentArea])
 
 
     const maxChar = 380;
@@ -63,7 +68,7 @@ function CommentSection(props) {
         <div className={classes['comment-section']}>
             <h2>User Comments</h2>
             {addCommentArea && <textarea ref={commentRef} maxLength={maxChar} placeholder={"Type a comment"}/>}
-            <ButtonQuote buttonText={buttonText} onclick={!addCommentArea ? ()=>setAddCommentArea(true) : addNewComment}/>
+            <ButtonQuote buttonText={buttonText} onclick={!addCommentArea ? ()=>setAddCommentArea((prevState) => !prevState) : addNewComment}/>
             {comments.length !==0
                 ?
                 comments.map((comment) =>

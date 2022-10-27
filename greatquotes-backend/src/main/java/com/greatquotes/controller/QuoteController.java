@@ -1,15 +1,14 @@
 package com.greatquotes.controller;
 
 import com.greatquotes.controller.dto.QuoteDto;
+import com.greatquotes.controller.mapper.QuoteMapper;
 import com.greatquotes.model.Quote;
-import com.greatquotes.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.greatquotes.service.QuoteService;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/great-quotes")
@@ -18,11 +17,18 @@ public class QuoteController {
 
     @Autowired
     private QuoteService quoteService;
+    private final QuoteMapper quoteMapper;
 
-//test git
+    public QuoteController(QuoteMapper quoteMapper) {
+        this.quoteMapper = quoteMapper;
+    }
+
+    //test git
     @GetMapping("/quotes")
     public List<QuoteDto> getAllQuotes(){
-        return quoteService.getAllQuotes();
+        List<Quote> quotes = quoteService.getAllQuotes();
+        List<QuoteDto> quoteDtoList= quotes.stream().map(quote -> quoteMapper.fromQuoteToQuoteDTO(quote)).collect(Collectors.toList());
+        return quoteDtoList;
     }
 
     @GetMapping("/quote/{id}")
@@ -30,12 +36,14 @@ public class QuoteController {
         return quoteService.findQuoteById(id);
     }
 
-    public QuoteService getQuoteService(){
-        return quoteService;
-    }
+    @PostMapping("quote/newQuote")
+    public void addNewQuote(@RequestBody QuoteDto newQuote){
+        QuoteDto quoteDto = new QuoteDto();
+        quoteDto.setAuthor(newQuote.getAuthor());
+        quoteDto.setQuote(newQuote.getQuote());
 
-    public QuoteService quoteService(){
-        return quoteService;
-    }
+        Quote quote = quoteMapper.fromQuoteDtoToQuote(quoteDto);
 
+        quoteService.setQuote(quote);
+    }
 }
