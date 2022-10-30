@@ -1,13 +1,12 @@
-import React, {useState,useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 
 function UseHttp() {
    const url ="http://localhost:8080/api/v1/great-quotes";
 
-   const [quotes,setQuotes] = useState([]);
    const [isLoading,setIsLoading] = useState(false);
    const [error, setError] = useState(null);
 
-   const sendRequest = useCallback(async (requestConfig, applyDataFunc)=> {
+   const sendRequest = useCallback(async (requestConfig, applyDataFunc=null)=> {
       setIsLoading(true);
       setError(null)
       try{
@@ -26,7 +25,9 @@ function UseHttp() {
          const data = await response.json();
 
          //Callback Func
-         applyDataFunc(data)
+         if(applyDataFunc!==null){
+            applyDataFunc(data)
+         }
       }
       catch (error ){
          setError(error.message || 'Something went wrong!');

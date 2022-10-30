@@ -38,7 +38,6 @@ function CommentSection(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: newComment,
             }
-            console.log(postUrl)
             postNewComment(postUrl, () => setNewCommentToList(newComment))
 
         }
@@ -59,7 +58,6 @@ function CommentSection(props) {
 
     useEffect(() =>{
         fetchAllComments(fetchURL,loadCommentList)
-        console.log("useEffect")
     },[buttonText, addCommentArea])
 
 
